@@ -1,0 +1,30 @@
+{
+  "name": "sofadog",
+  "displayName": "sofadog",
+  "expo": {
+    "name": "sofadog",
+    "slug": "sofadog",
+    "version": "1.0.0",
+    "assetBundlePatterns": ["**/*"]
+  },
+  "ios": {
+    "infoPlist": {
+      "CFBundleAllowMixedLocalizations": true
+    },
+    "usesAppleSignIn": true,
+    "config": {
+      "googleSignIn": {
+        "reservedClientId": "com.googleusercontent.apps.844580151916-arqukv4290i539bckkuf7kpgtrdhhfdl",
+        "_reservedClientId": "com.googleusercontent.apps.844580151916-ut3cllcl14081khp2anua26t4550flrm"
+      }
+    }
+  },
+  "android": {
+    "config": {
+      "googleSignIn": {
+        "apiKey": "AIzaSyCxgj731yz8nusdjGkKp7UB0VSgDTuLyh8",
+        "certificateHash": "B90E17C2F50768C3FC2BBCA9D87AF2A217D04D4DF4FA0C7DC3A10F462DDFF8A9"
+      }
+    }
+  }
+}

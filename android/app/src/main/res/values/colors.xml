@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!-- Splashscreen Colors -->
+  <color name="bootsplash_background">#040007</color>
+  <color name="start_gradient">#870085</color>
+  <color name="center_gradient">#28004d</color>
+  <color name="end_gradient">#040007</color>
+  <!-- Logo BG Gradient for launcher icon -->
+  <color name="logo_start_gradient">#5800BF</color>
+  <color name="logo_end_gradient">#FD3D9F</color>
+
+</resources>
+
+
