@@ -27,7 +27,7 @@ const MainNavigator = () => {
         },
       }}
     >
-      <Stack.Screen name="Main" component={DrawerNavigation} />
+      
       <Stack.Screen
         name="Onboarding"
         component={OnboardingScreen}
@@ -35,6 +35,7 @@ const MainNavigator = () => {
           stackPresentation: 'fullScreenModal',
         }}
       />
+      <Stack.Screen name="Main" component={DrawerNavigation} />
       <Stack.Screen
         name="Channel"
         component={ChannelNavigator}

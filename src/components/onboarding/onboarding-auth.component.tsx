@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { StyleProp } from 'react-native'
+import { StyleProp,ImageBackground, } from 'react-native'
 import styled, { useTheme } from 'styled-components/native'
 import tw from 'tailwind-rn'
 import FastImage, { ImageStyle } from 'react-native-fast-image'
@@ -11,6 +11,8 @@ import { useTranslation } from '@/providers'
 import { Button } from '../buttons.component'
 
 import LogoImage from '@/assets/images/onboarding-logo.png'
+import bgLogo from '@/assets/images/bglogo.png'
+import { RemoteImage } from '../remote-image.component'
 
 const buttonStyle = (backgroundColor: string) => ({
   backgroundColor,
@@ -41,17 +43,28 @@ export const OnboardingAuth = ({
 
   return (
     <>
-      <SlideWrapper>
+      {/* <SlideWrapper> */}
+      {/* <BackgroundImageWrapper>
+      <RemoteImage source={bgLogo} />
+      
+      </BackgroundImageWrapper> */}
+      <ImageBackground source={bgLogo} resizeMode="cover" style={{ flex: 1,paddingBottom:100,
+    justifyContent: "center"}}>
+    
+    
         <SlideContainer>
           <LogoWrapper>
-            <FastImage
+
+            {/* <FastImage
               style={imageStyle}
-              source={LogoImage as never}
+              // source={LogoImage as never}
+              source={bgLogo as never}
+
               resizeMode="contain"
-            />
+            /> */}
           </LogoWrapper>
           <TextContainer>
-            <Title>{`${i18n.t('onboarding_5_title')}`}</Title>
+            {/* <Title>{`${i18n.t('onboarding_5_title')}`}</Title> */}
             <ButtonWrapper>
               {!k.isAndroid && (
                 <Button
@@ -96,12 +109,13 @@ export const OnboardingAuth = ({
                 )} email`}</Button.Label>
               </Button>
             </ButtonWrapper>
-            <SkipButton onPress={() => onDismiss()}>
+            {/* <SkipButton onPress={() => onDismiss()}>
               <SkipLabel>{`${i18n.t('button_skip')}`}</SkipLabel>
-            </SkipButton>
+            </SkipButton> */}
           </TextContainer>
         </SlideContainer>
-      </SlideWrapper>
+        </ImageBackground>
+      {/* </SlideWrapper> */}
     </>
   )
 }
@@ -110,7 +124,7 @@ const SlideWrapper = styled.SafeAreaView`
   width: ${k.screen.w}px;
 `
 const SlideContainer = styled.View`
-  ${tw(`flex-1 items-center`)}
+  ${tw(`flex-1 items-center `)}
 `
 const TextContainer = styled.View`
   ${tw(`w-full items-center justify-center`)}
@@ -122,6 +136,9 @@ const Title = styled.Text`
 `
 const LogoWrapper = styled.View`
   ${tw(`items-center justify-center flex-1`)}
+`
+const BackgroundImageWrapper = styled.View`
+  ${tw(`absolute inset-0 rounded-xl overflow-hidden`)}
 `
 const ButtonWrapper = styled.View`
   ${tw(`justify-center`)}

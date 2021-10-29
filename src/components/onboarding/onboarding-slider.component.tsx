@@ -64,9 +64,9 @@ export const OnboardingSlider = ({
   }, [showAuth])
 
   React.useEffect(() => {
-    if (slideRefs.current) {
-      slideRefs.current[0].play(0, 46)
-    }
+    // if (slideRefs.current) {
+    //   slideRefs.current[0].play(0, 46)
+    // }
   }, [])
 
   const handleScrollBegin = React.useCallback(
@@ -154,14 +154,7 @@ export const OnboardingSlider = ({
       const title = `${i18n.t(`onboarding_${index + 1}_title` as never)}`
       const description = `${i18n.t(`onboarding_${index + 1}_text` as never)}`
 
-      return index !== SLIDE_COUNT - 1 ? (
-        <AnimatedSlide
-          id={item.id}
-          ref={r => (slideRefs.current[index] = r as never)}
-          animSource={item.animSource}
-          {...{ title, description }}
-        />
-      ) : (
+      return(
         <AuthSlide
           onDismiss={onClose}
           onSocialAuth={onSocialAuth}
@@ -175,12 +168,13 @@ export const OnboardingSlider = ({
   const renderFlatlist = React.useMemo(
     () => (
       <FlatListWrapper
-        ref={flatlistRef}
+        // ref={flatlistRef}
         render={renderItem}
-        onScroll={onScroll}
-        onScrollBegin={handleScrollBegin}
-        onScrollEnd={handleScrollEnd}
-        onScrollFail={scrollToIndexFailed}
+         
+        // onScroll={onScroll}
+        // onScrollBegin={handleScrollBegin}
+        // onScrollEnd={handleScrollEnd}
+        // onScrollFail={scrollToIndexFailed}
       />
     ),
     []
@@ -188,15 +182,15 @@ export const OnboardingSlider = ({
 
   return (
     <Wrapper>
-      <BackgroundWrapper style={bgImageWrapperStyle}>
+      {/* <BackgroundWrapper style={bgImageWrapperStyle}>
         <RemoteImage type="local" source={WaveImage} resizeMode="stretch" />
-      </BackgroundWrapper>
+      </BackgroundWrapper> */}
       {renderFlatlist}
-      <IndicatorWrapper style={{ bottom: insets.bottom }}>
+      {/* <IndicatorWrapper style={{ bottom: insets.bottom }}>
         {slides.map((item, index) => (
           <Indicator key={item.id} selected={index === selectedIdx} />
         ))}
-      </IndicatorWrapper>
+      </IndicatorWrapper> */}
     </Wrapper>
   )
 }

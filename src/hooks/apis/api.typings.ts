@@ -170,7 +170,17 @@ export type Category = {
  */
 
 export type UserSchema = PartialUser & {
-  admin_roles: Admin[]
+  username: string
+  email: string
+  first_name: string
+  last_name: string
+  job_title: string
+    avatar?: {
+    image_url?: string
+    height?: string
+    width?: string
+  }
+  admin_roles:[Admin]
   disabled: boolean
   on_shift: boolean
   creator_type: CreatorType | ''

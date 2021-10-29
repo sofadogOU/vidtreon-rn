@@ -77,6 +77,7 @@ export const post = async <Schema, Payload, Params, Headers>(
   pathParam?: string,
   headers?: Headers
 ) => {
+  console.log(" >>>payload "+ JSON.stringify(payload)+"  >>>path "+path)
   try {
     const { data } = await api.post<unknown, AxiosPromise<Schema>>(
       endPoints(pathParam)[path],

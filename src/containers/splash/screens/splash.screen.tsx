@@ -60,30 +60,31 @@ export const SplashScreen = ({ hide = false, onAnimationEnd }: Props) => {
   }
 
   return (
-    <AnimatedWrapper
-      animate={{ opacity: hide ? 0 : 1 }}
-      transition={{ type: 'timing', duration: 200 }}
-      onDidAnimate={handleAnimationEnd}
-    >
-      <GradientWrapper colors={gradient}>
-        {/* <AnimatedContainer
-          animate={{ opacity: isLoaded ? 1 : 0 }}
-          transition={{
-            type: 'timing',
-            duration: 500,
-            delay: 250,
-          }}
-        > */}
-          <FastImage
-            style={bgImageStyle}
-            source={MotifImg}
-            resizeMode="cover"
-            onLoad={handleLoaded}
-          />
-          {renderSpinner}
-        {/* </AnimatedContainer> */}
-      </GradientWrapper>
-    </AnimatedWrapper>
+  null
+    // <AnimatedWrapper
+    //   animate={{ opacity: hide ? 0 : 1 }}
+    //   transition={{ type: 'timing', duration: 200 }}
+    //   onDidAnimate={handleAnimationEnd}
+    // >
+    //   <GradientWrapper colors={gradient}>
+    //     {/* <AnimatedContainer
+    //       animate={{ opacity: isLoaded ? 1 : 0 }}
+    //       transition={{
+    //         type: 'timing',
+    //         duration: 500,
+    //         delay: 250,
+    //       }}
+    //     > */}
+    //       <FastImage
+    //         style={bgImageStyle}
+    //         source={MotifImg}
+    //         resizeMode="cover"
+    //         onLoad={handleLoaded}
+    //       />
+    //       {renderSpinner}
+    //     {/* </AnimatedContainer> */}
+    //   </GradientWrapper>
+    // </AnimatedWrapper>
   )
 }
 
