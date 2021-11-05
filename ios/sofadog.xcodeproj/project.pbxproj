@@ -171,7 +171,7 @@
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = CGYHFCCU8D;
 						LastSwiftMigration = 1240;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -254,7 +254,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-sofadog/Pods-sofadog-frameworks.sh",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL/OpenSSL.framework/OpenSSL",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL-Universal/OpenSSL.framework/OpenSSL",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -365,9 +365,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = sofadog/sofadog.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development: Mihkel Oja (8B53VCH979)";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = CGYHFCCU8D;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -387,7 +387,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.vidtreon.ios;
 				PRODUCT_NAME = sofadog;
-				PROVISIONING_PROFILE_SPECIFIER = VidtreonDEV;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "sofadog-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -402,9 +402,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = sofadog/sofadog.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development: Mihkel Oja (8B53VCH979)";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = CGYHFCCU8D;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = sofadog/Info.plist;
@@ -418,7 +418,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.vidtreon.ios;
 				PRODUCT_NAME = sofadog;
-				PROVISIONING_PROFILE_SPECIFIER = VidtreonDEV;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "sofadog-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";

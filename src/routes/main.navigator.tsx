@@ -12,11 +12,16 @@ import { ChannelNavigator } from './channel.navigator'
 import { VideoPlayerScreen } from '@/containers/video-player'
 import { ShopScreen } from '@/containers/shop'
 import { OnboardingScreen } from '@/containers/onboarding'
-
+import {
+  useStore,
+} from '@/hooks'
+import { ChannelDetailScreen } from '@/containers/channel'
 enableScreens()
 const Stack = createNativeStackNavigator<MainStackParamList>()
 
+
 const MainNavigator = () => {
+  const store = useStore()
   const insets = useSafeAreaInsets()
   return (
     <Stack.Navigator
@@ -27,10 +32,16 @@ const MainNavigator = () => {
         },
       }}
     >
-      
+      {/* <Stack.Screen
+        name="ChannelDetail"
+        component={ChannelDetailScreen}
+        options={{
+          stackPresentation: 'fullScreenModal',
+        }}
+      /> */}
       <Stack.Screen
-        name="Onboarding"
-        component={OnboardingScreen}
+        name={store.isVisitor? "ChannelDetail" : "Onboarding"}
+        component={ store.isVisitor? ChannelDetailScreen: OnboardingScreen}
         options={{
           stackPresentation: 'fullScreenModal',
         }}

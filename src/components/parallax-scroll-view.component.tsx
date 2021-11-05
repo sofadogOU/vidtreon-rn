@@ -26,6 +26,7 @@ interface Props {
   avatarUrl: string
   coverUrl: string
   title?: string
+  backBtnColor?: string
   followerCount?: string
   price?: number
   subscribed?: boolean
@@ -49,6 +50,7 @@ export const ParallaxScrollView = ({
   onBackPress,
   onDetailPress,
   onPurchasePress,
+  backBtnColor,
   subscribed = false,
   showButtonSpinner = false,
 }: Props) => {
@@ -97,6 +99,10 @@ export const ParallaxScrollView = ({
     Haptics.trigger('impactLight', k.hapticOptions)
     onDetailPress()
   }
+
+  React.useEffect(() => {
+   console.log("hello" + JSON.stringify(backBtnColor))
+   })
 
   return (
     <Container>
@@ -171,6 +177,7 @@ export const ParallaxScrollView = ({
               <ActionWrapper>
                 <Action
                   onPress={handlePurchasePress}
+                  style={{backgroundColor: backBtnColor}}
                   disabled={showButtonSpinner}
                 >
                   {!showButtonSpinner ? (
@@ -301,6 +308,7 @@ const Action = styled.TouchableOpacity`
   ${tw(`h-10 w-full flex-row rounded-full px-4
   items-center justify-center`)};
   background-color: ${({ theme }) => theme.primary.tint};
+  
 `
 const ActionLabel = styled.Text`
   ${tw(`text-base font-normal text-white`)}

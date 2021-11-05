@@ -53,12 +53,31 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
   const share = useShareProvider()
   const filterPremium = useFilterPremium()
 
+  const [channelId, setchannelId] = React.useState("")
+  const [bgcolor, setbgcolor] = React.useState("")
+
   const getUserState = React.useCallback(
     state => ({
       user: state.user,
     }),
     []
   )
+
+  React.useEffect(() => {
+   getchannelIdFromApi()
+  })
+
+  const getchannelIdFromApi = () => {
+    fetch('http://settings.vidtreon.com/')
+   .then((response) => response.json())
+   .then((rsn) => {
+     setchannelId(String(rsn.channel_id))
+     setbgcolor(String(rsn.background_color))
+   })
+   .catch((error) => {
+     console.error(error);
+   });
+};
 
   const { user } = useStore(getUserState)
   const { data: balance } = useBalance()
@@ -71,16 +90,16 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
 
   const subscribe = useSubscribe()
   const { data: feedData, refetch: refetchFeed } = useFeed({
-    feedId: route.params.id,
+    feedId: route?.params?.id ? route?.params?.id  : channelId,
   })
   const { data: subscriptions } = useSubscriptions()
   const { data: allVideoData } = useVideos({
-    feedId: route.params.id,
+    feedId:route?.params?.id ? route?.params?.id  : channelId,
     limit: 1000,
   })
   const { data: latestVideoData } = useVideos({
     type: 'latest',
-    feedId: route.params.id,
+    feedId: route?.params?.id ? route?.params?.id  : channelId,
   })
 
   const linkStyle = React.useMemo(
@@ -226,7 +245,7 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
           followerCount={`${feedData.followerCount}`}
           // onBackPress={handleBackPress}
           onBackPress={()=>{}}
-
+          backBtnColor = {bgcolor}
           onDetailPress={handleChannelDetailPress}
           onPurchasePress={handlePurchasePress}
           subscribed={isSubscriber(feedData, subscriptions)}

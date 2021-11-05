@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>920734956176-07botff27cs9nrr3g3ohmrj6t1nvcno4.apps.googleusercontent.com</string>
+	<string>920734956176-mdnsmur3sr1ejbgc7j2n44r3cl0b5qb6.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.920734956176-07botff27cs9nrr3g3ohmrj6t1nvcno4</string>
+	<string>com.googleusercontent.apps.920734956176-mdnsmur3sr1ejbgc7j2n44r3cl0b5qb6</string>
 	<key>ANDROID_CLIENT_ID</key>
-	<string>920734956176-ia3mckcje81b166oqq2201vegk82dj60.apps.googleusercontent.com</string>
+	<string>920734956176-14eghlvlr31kmo6eguht0db56civce09.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDpAQeC1p8_iEt1L2g3GIBntXPIeo5qI3Q</string>
 	<key>GCM_SENDER_ID</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>dog.fa.so.app</string>
+	<string>com.vidtreon.ios</string>
 	<key>PROJECT_ID</key>
 	<string>sofadog-9325a</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,7 +31,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:920734956176:ios:9ad0d63b6f073a3e803615</string>
+	<string>1:920734956176:ios:7abcce26812253cc803615</string>
 	<key>DATABASE_URL</key>
 	<string>https://sofadog-9325a.firebaseio.com</string>
 </dict>

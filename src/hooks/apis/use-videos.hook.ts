@@ -3,7 +3,7 @@ import { useQuery } from 'react-query'
 
 import * as api from '@/services/networking.service'
 import * as transform from './api.transformers'
-import { VideoTypes, VideosSchema, Video, PagingPayload } from './api.typings'
+import { VideoTypes, VideosSchema, Video, PagingPayload, ChannelIdSchema} from './api.typings'
 import { useStore } from '../use-store.hook'
 
 type Params = {
@@ -122,3 +122,23 @@ export const useExploreVideos = ({
     }
   )
 }
+
+export const channelId = () => {
+  const store = useStore()
+  const userId = store.user?.id
+  const token = store.token
+
+  return useQuery<unknown, unknown>(
+    'balance',
+    api.get<ChannelIdSchema, unknown>('balance', userId, {
+      token: token,
+    }),
+    {
+      enabled: !!userId,
+      notifyOnChangeProps: ['data', 'error'],
+      select: React.useCallback(data => transform.balance(data), []),
+    }
+  )
+}
+
+
