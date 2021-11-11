@@ -6,6 +6,7 @@ import Autolink from 'react-native-autolink'
 import BottomSheet from '@gorhom/bottom-sheet'
 import Spinner from 'react-native-spinkit'
 import kebabCase from 'lodash/kebabCase'
+import faker from 'faker'
 import Toast from 'react-native-toast-message'
 
 import {
@@ -40,6 +41,7 @@ import {
   VideoGalleryList,
   EmptyStateView,
   toastConfig,
+  UserInfo
 } from '@/components'
 
 interface Props {
@@ -56,12 +58,15 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
   const [channelId, setchannelId] = React.useState("")
   const [bgcolor, setbgcolor] = React.useState("")
 
+  
+
   const getUserState = React.useCallback(
     state => ({
       user: state.user,
     }),
     []
   )
+
 
   React.useEffect(() => {
    getchannelIdFromApi()
@@ -72,16 +77,16 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
    .then((response) => response.json())
    .then((rsn) => {
      setchannelId(String(rsn.channel_id))
-     setbgcolor(String(rsn.background_color))
+     setbgcolor(String(rsn.button_color))
    })
    .catch((error) => {
      console.error(error);
    });
 };
 
-  const { user } = useStore(getUserState)
+  
   const { data: balance } = useBalance()
-
+  const { user } = useStore(getUserState)
   const channelModalRef = React.useRef<BottomSheet>(null)
   const videoModalRef = React.useRef<BottomSheet>(null)
   const selectedItemRef = React.useRef<Video>()
@@ -175,6 +180,10 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
     channelModalRef.current?.expand()
   }
 
+  const onBalancePress = () => {
+    navigation.dangerouslyGetParent()?.navigate('Shop')
+  }
+
   const handleVideoPress = (id: string) => {
     navigation.dangerouslyGetParent()?.navigate('MediaPlayer', {
       id,
@@ -218,6 +227,10 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
     }
   }
 
+  const handlePurchasPress = () => {
+    navigation.navigate('Shop')
+  }
+
   const channelModalItems: ToastModalItem[] = [
     {
       title: i18n.t('share_channel'),
@@ -236,14 +249,14 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
 
   return (
     <>
-      {feedData && latestVideoData && allVideoData && (
+      {feedData && latestVideoData && allVideoData && user && (
         <ParallaxScrollView
           coverUrl={feedData.coverUrl}
           title={feedData.name}
           avatarUrl={feedData.avatarUrl}
           price={feedData.price}
           followerCount={`${feedData.followerCount}`}
-          // onBackPress={handleBackPress}
+          onBalancePress={handlePurchasPress}
           onBackPress={()=>{}}
           backBtnColor = {bgcolor}
           onDetailPress={handleChannelDetailPress}

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Animated } from 'react-native'
+import { Animated, View, Text } from 'react-native'
 import styled, { useTheme } from 'styled-components/native'
 import tw from 'tailwind-rn'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
@@ -8,6 +8,16 @@ import { ScrollView } from 'react-native-gesture-handler'
 import Haptics from 'react-native-haptic-feedback'
 import MaskView from '@react-native-masked-view/masked-view'
 import Spinner from 'react-native-spinkit'
+import faker from 'faker'
+
+import {
+  UserInfo,
+} from '@/components'
+
+import {
+  useStore,
+  useBalance,
+} from '@/hooks'
 
 import * as k from '@/utils/constants'
 
@@ -15,6 +25,7 @@ import { useTranslation } from '@/providers/TranslationProvider'
 import { Icon } from './icon.component'
 import { LinePlaceholder } from './placeholders.component'
 import { RemoteImage } from './remote-image.component'
+import CoinImg from '@/assets/images/coins-icon.png'
 
 import CoinsIcon from '@/assets/images/coins-icon.png'
 
@@ -34,11 +45,15 @@ interface Props {
   onBackPress: () => void
   onDetailPress: () => void
   onPurchasePress: () => void
+  onBalancePress?: () => void
+  
+  
 }
 
 const HEADER_MAX_HEIGHT = 300
 const HEADER_MIN_HEIGHT = k.isAndroid ? 200 : 230
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT
+
 
 export const ParallaxScrollView = ({
   children,
@@ -50,6 +65,7 @@ export const ParallaxScrollView = ({
   onBackPress,
   onDetailPress,
   onPurchasePress,
+  onBalancePress,
   backBtnColor,
   subscribed = false,
   showButtonSpinner = false,
@@ -57,6 +73,17 @@ export const ParallaxScrollView = ({
   const insets = useSafeAreaInsets()
   const theme = useTheme()
   const i18n = useTranslation()
+  const { data: balance } = useBalance()
+
+  // const balance = 40
+   
+  const getUserState = React.useCallback(
+    state => ({
+      user: state.user,
+    }),
+    []
+  )
+  const { user } = useStore(getUserState)
 
   const _scrollY = React.useRef(
     new Animated.Value(k.isAndroid ? 0 : -HEADER_MAX_HEIGHT)
@@ -90,22 +117,27 @@ export const ParallaxScrollView = ({
     locations: [0, 0.3, 0.95],
   }
 
-  const handlePurchasePress = () => {
-    Haptics.trigger('impactLight', k.hapticOptions)
-    onPurchasePress()
-  }
+  // const handlePurchasePress = () => {
+  //   Haptics.trigger('impactLight', k.hapticOptions)
+  //   onPurchasePress()
+  // }
 
   const handleDetailPress = () => {
     Haptics.trigger('impactLight', k.hapticOptions)
     onDetailPress()
   }
 
+  const handleBalancePress = () => {
+    Haptics.trigger('impactLight', k.hapticOptions)
+    onBalancePress?.()
+  }
+
   React.useEffect(() => {
    console.log("hello" + JSON.stringify(backBtnColor))
    })
-
+   
   return (
-    <Container>
+    <Container>      
       <AnimatedScrollView
         contentContainerStyle={{
           paddingBottom: k.isAndroid ? HEADER_MAX_HEIGHT : 0,
@@ -171,12 +203,23 @@ export const ParallaxScrollView = ({
                 </FollowersLabel>
               )}
             </TextWrapper>
-          </HeaderWrapper>
-          <ActionsContainer>
+
+          {balance >=70 ?<View style = {{paddingRight: 20}}>  
+          <VCButton onPress={handleBalancePress}>
+          <RemoteImage
+            type="local"
+            source={CoinImg}
+            resizeMode="contain"
+            style={coinsImageStyle}
+            tintColor={theme.text.body}
+          />
+          <VCLabel>{balance}</VCLabel>
+        </VCButton>
+        </View>:<ActionsContainer>
             {price !== undefined && !subscribed && (
               <ActionWrapper>
                 <Action
-                  onPress={handlePurchasePress}
+                  // onPress={handlePurchasePress}
                   style={{backgroundColor: backBtnColor}}
                   disabled={showButtonSpinner}
                 >
@@ -209,6 +252,7 @@ export const ParallaxScrollView = ({
                   )}
                 </Action>
               </ActionWrapper>
+
             )}
             {subscribed && (
               <ActionWrapper>
@@ -226,9 +270,13 @@ export const ParallaxScrollView = ({
               </ActionWrapper>
             )}
             <MenuAction onPress={handleDetailPress}>
-              <Icon name="more" color={theme.mutedBackgroundText} />
+              <Icon name="more" color={theme.mutedBackgroundText}/>
             </MenuAction>
-          </ActionsContainer>
+          </ActionsContainer>}
+ 
+          </HeaderWrapper>
+         {/* {balance >=70 && 
+          } */}
         </Header>
       </AnimatedHeader>
       <AnimatedBar
@@ -323,3 +371,16 @@ const MenuAction = styled.TouchableOpacity`
   ${tw(`w-1/6 ml-3 rounded-full items-center justify-center bg-gray-400`)};
   background-color: ${({ theme }) => theme.mutedBackground};
 `
+const VCButton = styled.TouchableOpacity`
+  ${tw(`h-10 flex-row rounded-full px-4 items-center justify-center mr-3`)};
+  background-color: ${({ theme }) => theme.primary.shade};
+`
+const VCLabel = styled.Text`
+  ${tw(`text-base font-bold`)};
+  color: ${({ theme }) => theme.text.body};
+`
+const coinsImageStyle = {
+  width: 20,
+  height: 20,
+  marginRight: 4,
+}

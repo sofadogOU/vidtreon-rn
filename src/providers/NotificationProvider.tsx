@@ -94,9 +94,9 @@ const NotificationProvider = ({ children }: Props) => {
 
   const getFCMToken = async () => {
     try {
-      // await messaging().registerDeviceForRemoteMessages()
+      await messaging().registerDeviceForRemoteMessages()
       const fcmToken = await messaging().getToken()
-      // console.log(fcmToken)
+      console.log("skjsdjsd" + fcmToken)
       return fcmToken
     } catch (e) {
       Sentry.captureException(e)

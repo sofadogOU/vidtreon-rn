@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Alert } from "react-native";
+import { Alert, Platform } from "react-native";
 import { firebase } from "@react-native-firebase/messaging";
 
 import {
@@ -54,19 +54,40 @@ export const OnboardingScreen = ({ navigation, route }: Props) => {
   React.useEffect(() => {
     if (route.params?.showAuth) {
       setShowAuthSlide(true);
+      registerAppWithFCM()
     }
   }, [route]);
 
   const handleClose = () => {
     store.setVisitor(true);
 
-    handlePresentChannel("1");
+    // handlePresentChannel("1");
+
+    getchannelIdFromApi()
 
     // @ts-ignore
     // navigation.navigate('Drawer', {
     //   screen: 'Explore',
     // })
   };
+
+  const registerAppWithFCM = async () => {
+    if(Platform.OS === 'ios') {
+        await firebase.messaging().registerDeviceForRemoteMessages();
+        await firebase.messaging().setAutoInitEnabled(true);
+    }
+}
+
+  const getchannelIdFromApi = () => {
+    fetch('http://settings.vidtreon.com/')
+   .then((response) => response.json())
+   .then((rsn) => {
+     handlePresentChannel(rsn.channel_id);
+   })
+   .catch((error) => {
+     console.error(error);
+   });
+};
 
   const handlePresentChannel = React.useCallback(
     (id: string) => {
@@ -129,8 +150,10 @@ export const OnboardingScreen = ({ navigation, route }: Props) => {
 
   const handleLogin = async ({ email, password }: LoginCredentials) => {
     try {
+      console.log("sljaskdj")
       setShowSpinner(true);
       const fcmToken = await firebase.messaging().getToken();
+      console.log("token" +  fcmToken )
       const res = await login.mutateAsync({
         email,
         password,

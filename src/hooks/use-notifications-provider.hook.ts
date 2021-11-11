@@ -116,9 +116,9 @@ export const useNotificationProvider = () => {
 
   const getFCMToken = async () => {
     try {
-      // await messaging().registerDeviceForRemoteMessages()
+      await messaging().registerDeviceForRemoteMessages()
       const fcmToken = await messaging().getToken()
-      // console.log(fcmToken)
+      console.log("ksdjskldj" + fcmToken)
       return fcmToken
     } catch (e) {
       Sentry.captureException(e)
