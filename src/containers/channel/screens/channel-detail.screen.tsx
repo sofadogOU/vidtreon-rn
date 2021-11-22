@@ -183,10 +183,12 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
   const onBalancePress = () => {
     navigation.dangerouslyGetParent()?.navigate('Shop')
   }
-
+  
   const handleVideoPress = (id: string) => {
     navigation.dangerouslyGetParent()?.navigate('MediaPlayer', {
       id,
+    // navigation.navigate('MediaPlayer', {
+    //   id,
     })
   }
 

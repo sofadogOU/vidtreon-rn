@@ -46,10 +46,10 @@ export const authCredentials = {
     secret: 'd5f50c0bdbfdf9ca8818e0d9228e0676',
   },
   iapHub: {
-    appId: __DEV__ ? '5fb730eb70df310e9d96aeb4' : '5fb730eb70df310e9d96aeb4',
+    appId: __DEV__ ? '618e0b8c17a6424be5f1fd93' : '618e0b8c17a6424be5f1fd93', 
     apiKey: __DEV__
-      ? 'YLyUe3xweRZEBK46QJOUVxzEyfTMm'
-      : 'YLyUe3xweRZEBK46QJOUVxzEyfTMm',
+      ? 'sw45O4DMelUQlNCKlVJcpuEfRJfqGV'
+      : 'sw45O4DMelUQlNCKlVJcpuEfRJfqGV',
   },
 }
 

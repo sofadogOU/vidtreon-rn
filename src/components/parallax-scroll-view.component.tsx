@@ -117,10 +117,10 @@ export const ParallaxScrollView = ({
     locations: [0, 0.3, 0.95],
   }
 
-  // const handlePurchasePress = () => {
-  //   Haptics.trigger('impactLight', k.hapticOptions)
-  //   onPurchasePress()
-  // }
+  const handlePurchasePress = () => {
+    Haptics.trigger('impactLight', k.hapticOptions)
+    onPurchasePress()
+  }
 
   const handleDetailPress = () => {
     Haptics.trigger('impactLight', k.hapticOptions)
@@ -219,7 +219,7 @@ export const ParallaxScrollView = ({
             {price !== undefined && !subscribed && (
               <ActionWrapper>
                 <Action
-                  // onPress={handlePurchasePress}
+                  onPress={handlePurchasePress}
                   style={{backgroundColor: backBtnColor}}
                   disabled={showButtonSpinner}
                 >
