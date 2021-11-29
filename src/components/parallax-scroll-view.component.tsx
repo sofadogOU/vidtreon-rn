@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Animated, View, Text } from 'react-native'
+import { Animated, View, Text, Alert } from 'react-native'
 import styled, { useTheme } from 'styled-components/native'
 import tw from 'tailwind-rn'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
@@ -38,6 +38,9 @@ interface Props {
   coverUrl: string
   title?: string
   backBtnColor?: string
+  subscriptionBtnText?: string
+  donationBtnText?:string
+  mobileBackgroundColor?: string
   followerCount?: string
   price?: number
   subscribed?: boolean
@@ -67,6 +70,9 @@ export const ParallaxScrollView = ({
   onPurchasePress,
   onBalancePress,
   backBtnColor,
+  subscriptionBtnText,
+  donationBtnText,
+  mobileBackgroundColor,
   subscribed = false,
   showButtonSpinner = false,
 }: Props) => {
@@ -75,7 +81,7 @@ export const ParallaxScrollView = ({
   const i18n = useTranslation()
   const { data: balance } = useBalance()
 
-  // const balance = 40
+  // const balance = 200
    
   const getUserState = React.useCallback(
     state => ({
@@ -84,7 +90,7 @@ export const ParallaxScrollView = ({
     []
   )
   const { user } = useStore(getUserState)
-
+   
   const _scrollY = React.useRef(
     new Animated.Value(k.isAndroid ? 0 : -HEADER_MAX_HEIGHT)
   )
@@ -119,6 +125,7 @@ export const ParallaxScrollView = ({
 
   const handlePurchasePress = () => {
     Haptics.trigger('impactLight', k.hapticOptions)
+    console.log("lap")
     onPurchasePress()
   }
 
@@ -132,9 +139,27 @@ export const ParallaxScrollView = ({
     onBalancePress?.()
   }
 
-  React.useEffect(() => {
-   console.log("hello" + JSON.stringify(backBtnColor))
-   })
+  const handleDonationPress = () => {
+    Haptics.trigger('impactLight', k.hapticOptions)
+    putDonationIncrement()
+    Alert.alert("Oooops! their has been a error  handling your donation")
+  }
+
+  const putDonationIncrement = () => {
+    fetch('https://settings.vidtreon.com/donation/count/increment', {
+    method: 'PUT',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+  }).then((response) => response.json())
+  .then((rsn) => {
+     console.log("donation response" + rsn) 
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+  }
    
   return (
     <Container>      
@@ -159,6 +184,7 @@ export const ParallaxScrollView = ({
         )}
       >
         <ContentContainer>{children}</ContentContainer>
+        
       </AnimatedScrollView>
       <AnimatedHeader
         pointerEvents="box-none"
@@ -184,6 +210,7 @@ export const ParallaxScrollView = ({
             <RemoteImage source={coverUrl} resizeMode="cover" />
           </CoverImageWrapper>
         </AnimatedMask>
+   
         <Header>
           <HeaderWrapper>
             <AvatarWrapper>
@@ -203,8 +230,12 @@ export const ParallaxScrollView = ({
                 </FollowersLabel>
               )}
             </TextWrapper>
+        
+ 
+          </HeaderWrapper>
 
-          {balance >=70 ?<View style = {{paddingRight: 20}}>  
+          
+          {price >= balance ?<View style = {{paddingRight: 20}}>  
           <VCButton onPress={handleBalancePress}>
           <RemoteImage
             type="local"
@@ -225,12 +256,16 @@ export const ParallaxScrollView = ({
                 >
                   {!showButtonSpinner ? (
                     <>
-                      <ActionLabel>
+                      {/* <ActionLabel>
                         {price !== 0
                           ? `${i18n.t('channel_subscribe')} ${price}`
                           : i18n.t('channel_subscribe_free')}
+                      </ActionLabel> */}
+
+                      <ActionLabel>
+                        {subscriptionBtnText}
                       </ActionLabel>
-                      {price !== 0 && (
+                      {/* {price !== 0 && (
                         <RemoteImage
                           type="local"
                           source={CoinsIcon}
@@ -238,8 +273,8 @@ export const ParallaxScrollView = ({
                           tintColor={theme.text.light}
                           style={{ height: 20, width: 20, marginLeft: 4 }}
                         />
-                      )}
-                      {price !== 0 && <ActionSuffix>p/m</ActionSuffix>}
+                      )} */}
+                      {/* {price !== 0 && <ActionSuffix>p/m</ActionSuffix>} */}
                     </>
                   ) : (
                     <Spinner
@@ -251,8 +286,7 @@ export const ParallaxScrollView = ({
                     />
                   )}
                 </Action>
-              </ActionWrapper>
-
+              </ActionWrapper> 
             )}
             {subscribed && (
               <ActionWrapper>
@@ -269,16 +303,61 @@ export const ParallaxScrollView = ({
                 </Action>
               </ActionWrapper>
             )}
-            <MenuAction onPress={handleDetailPress}>
+            {/* <MenuAction onPress={handleDetailPress}>
               <Icon name="more" color={theme.mutedBackgroundText}/>
-            </MenuAction>
+            </MenuAction> */}
           </ActionsContainer>}
- 
-          </HeaderWrapper>
          {/* {balance >=70 && 
           } */}
+            {<ActionsContainer style={{marginTop:10}} >
+            {price !== undefined && !subscribed && (
+              <ActionWrapper  >
+                <Action
+                  onPress={handleDonationPress}
+                  style={{backgroundColor: backBtnColor}}
+                  disabled={showButtonSpinner}
+                >
+                  {!showButtonSpinner ? (
+                    <>
+                      <ActionLabel>
+                        {donationBtnText}
+                      </ActionLabel>
+                     
+                    </>
+                  ) : (
+                    <Spinner
+                      type="ThreeBounce"
+                      color="white"
+                      style={{
+                        marginTop: k.isAndroid ? 0 : -8,
+                      }}
+                    />
+                  )}
+                </Action>
+              </ActionWrapper> 
+            )}
+            {subscribed && (
+              <ActionWrapper>
+                <Action
+                  disabled
+                  style={{ backgroundColor: theme.secondary.tint }}
+                >
+                  <ActionLabel>{i18n.t('label_subscribed')}</ActionLabel>
+                  <Icon
+                    name="tick"
+                    size="xs"
+                    containerStyle={{ marginLeft: 8 }}
+                  />
+                </Action>
+              </ActionWrapper>
+            )}
+          
+          </ActionsContainer>}
         </Header>
+        
       </AnimatedHeader>
+      <Text>
+        </Text>
       <AnimatedBar
         style={{
           marginTop: insets.top,
@@ -377,6 +456,10 @@ const VCButton = styled.TouchableOpacity`
 `
 const VCLabel = styled.Text`
   ${tw(`text-base font-bold`)};
+  color: ${({ theme }) => theme.text.body};
+`
+const VCView = styled.Text`
+  ${tw(`absolute my-20 w-1/3 ml-60 px-2`)};
   color: ${({ theme }) => theme.text.body};
 `
 const coinsImageStyle = {

@@ -43,25 +43,24 @@ export const ShopScreen = ({ navigation }: Props) => {
   const [selectedIndex, setSelectedIndex] = React.useState(1);
 
   const [isMonthly, setMonthly] = React.useState(true);
+  
 
   const handlePurchase = async () => {
     try {
-      // if (renewables && consumables) {
-        if (consumables) {
-        setBusy(true);
+      if (renewables && consumables) {
+        setBusy(true)
         await iap.buy(
-          // isMonthly
-            // ? renewables[selectedIndex].sku
-            // :
-             consumables[selectedIndex].sku
-        );
-        await refetchBalance();
-        setBusy(false);
+          isMonthly
+            ? renewables[selectedIndex].sku
+            : consumables[selectedIndex].sku
+        )
+        await refetchBalance()
+        setBusy(false)
       }
     } catch (e) {
-      setBusy(false);
+      setBusy(false)
     }
-  };
+  }
 
   const bootstrap = async () => {
     setLoading(true);

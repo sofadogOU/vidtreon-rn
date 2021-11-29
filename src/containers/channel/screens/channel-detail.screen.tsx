@@ -28,6 +28,7 @@ import {
   Channel,
   useFilterPremium,
   useShareProvider,
+  MMKV,
 } from '@/hooks'
 
 import {
@@ -57,6 +58,11 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
 
   const [channelId, setchannelId] = React.useState("")
   const [bgcolor, setbgcolor] = React.useState("")
+  const [buttonColor, setBtnColor] = React.useState("")
+  const [buttonBackColor, setBtnBackColor] = React.useState("")
+  const [subscriptionBtnText, setSubscriptionBtnText] = React.useState("")
+  const [donationBtnText, setDonationBtnText] = React.useState("")
+
 
   
 
@@ -69,6 +75,9 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
 
 
   React.useEffect(() => {
+    if(MMKV){
+      MMKV.clearMemoryCache();
+    }
    getchannelIdFromApi()
   })
 
@@ -78,13 +87,17 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
    .then((rsn) => {
      setchannelId(String(rsn.channel_id))
      setbgcolor(String(rsn.button_color))
+     setBtnColor(String(rsn.mobile_button_color))
+     setBtnBackColor(String(rsn.mobile_background_color))
+     setSubscriptionBtnText(String(rsn.subscription_button_text))
+     setDonationBtnText(String(rsn.donation_button_text))
+     
    })
    .catch((error) => {
-     console.error(error);
+     console.error(error);8
    });
 };
 
-  
   const { data: balance } = useBalance()
   const { user } = useStore(getUserState)
   const channelModalRef = React.useRef<BottomSheet>(null)
@@ -154,6 +167,7 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
   }
 
   const handlePurchasePress = () => {
+    console.log("tap")
     if (user && feedData && typeof balance === 'number') {
       if (typeof feedData.price === 'number' && balance >= feedData.price) {
         Alert.alert(
@@ -167,12 +181,15 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
           ]
         )
       } else {
-        navigation.dangerouslyGetParent()?.navigate('Shop')
+        // navigation.dangerouslyGetParent()?.navigate('Shop')
+        navigation.navigate('Shop')
       }
     } else {
-      navigation
-        .dangerouslyGetParent()
-        ?.navigate('Onboarding', { showAuth: true })
+
+      // .dangerouslyGetParent()
+      //   ?.navigate('Onboarding', { showAuth: true }) 
+
+      navigation?.navigate('Onboarding', { showAuth: true })
     }
   }
 
@@ -184,6 +201,7 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
     navigation.dangerouslyGetParent()?.navigate('Shop')
   }
   
+
   const handleVideoPress = (id: string) => {
     navigation.dangerouslyGetParent()?.navigate('MediaPlayer', {
       id,
@@ -228,6 +246,7 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
       videoModalRef.current?.collapse()
     }
   }
+  
 
   const handlePurchasPress = () => {
     navigation.navigate('Shop')
@@ -251,7 +270,7 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
 
   return (
     <>
-      {feedData && latestVideoData && allVideoData && user && (
+      {feedData && latestVideoData && allVideoData &&  (
         <ParallaxScrollView
           coverUrl={feedData.coverUrl}
           title={feedData.name}
@@ -260,13 +279,16 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
           followerCount={`${feedData.followerCount}`}
           onBalancePress={handlePurchasPress}
           onBackPress={()=>{}}
-          backBtnColor = {bgcolor}
+          backBtnColor = {buttonColor}
+          mobileBackgroundColor = {buttonBackColor}
+          subscriptionBtnText = {subscriptionBtnText}
+          donationBtnText = {donationBtnText}
           onDetailPress={handleChannelDetailPress}
           onPurchasePress={handlePurchasePress}
           subscribed={isSubscriber(feedData, subscriptions)}
           showButtonSpinner={isBusy}
         >
-          <Container>
+          <Container style={{backgroundColor:buttonBackColor}}>
             <Section>
               <SectionTitle icon="about">
                 {i18n.t('channel_section1')}

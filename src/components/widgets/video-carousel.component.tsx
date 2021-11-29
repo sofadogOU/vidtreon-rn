@@ -121,8 +121,8 @@ export const VideoCarousel = ({
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: 1,
-    minWidth: 1,
+    minHeight: 10,
+    minWidth: 10,
     marginVertical: k.sizes.sm,
   },
   contentContainer: {

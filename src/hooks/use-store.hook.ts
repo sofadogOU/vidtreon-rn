@@ -2,7 +2,6 @@ import create, { GetState, SetState, StateCreator, StoreApi } from 'zustand'
 import MMKVStorage from 'react-native-mmkv-storage'
 import { ColorSchemeName, Appearance } from 'react-native-appearance'
 import { SocialDomains, User } from '@/hooks'
-
 const MMKV = new MMKVStorage.Loader().initialize()
 const defaultTheme = Appearance.getColorScheme() || 'light'
 
