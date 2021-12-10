@@ -73,6 +73,8 @@
 	<string>311203853574729</string>
 	<key>FacebookDisplayName</key>
 	<string>so.fa.dog</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -107,6 +109,7 @@
 	<string>This app requests access to your photo library in order for you to add images to comments, and change your avatar.</string>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>external-accessory</string>
 		<string>fetch</string>
 		<string>processing</string>
 		<string>remote-notification</string>

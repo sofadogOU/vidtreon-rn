@@ -94,7 +94,7 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
      
    })
    .catch((error) => {
-     console.error(error);8
+     console.error(error);
    });
 };
 
@@ -105,6 +105,8 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
   const selectedItemRef = React.useRef<Video>()
 
   const [isBusy, setBusy] = React.useState(false)
+
+  const store = useStore()
 
   const subscribe = useSubscribe()
   const { data: feedData, refetch: refetchFeed } = useFeed({
@@ -124,6 +126,10 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
     () => ({ color: theme.primary.tint }),
     [theme]
   )
+
+  React.useEffect(() => {
+    const token = store.token
+  }, [store])
 
   const isSubscriber = React.useCallback(
     (feed: Channel, subscriptions?: Channel[]) => {

@@ -1,4 +1,4 @@
-package dog.fa.so.app;
+package dog.fa.so.app; 
 
 import android.graphics.Color;
 import android.os.Bundle;

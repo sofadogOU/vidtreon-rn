@@ -16,11 +16,41 @@ or alternatively using `brew install fastlane`
 
 # Available Actions
 ## iOS
-### ios custom_lane
+### ios create_app
 ```
-fastlane ios custom_lane
+fastlane ios create_app
 ```
-Description of what the lane does
+Create app on Apple Developer and App Store Connect
+### ios sync_profiles
+```
+fastlane ios sync_profiles
+```
+Sync certificates
+### ios build
+```
+fastlane ios build
+```
+Create ipa
+### ios beta
+```
+fastlane ios beta
+```
+Upload to TestFlight
+### ios screenshot
+```
+fastlane ios screenshot
+```
+Take screenshots
+### ios upload
+```
+fastlane ios upload
+```
+Upload to App Store
+### ios release_app
+```
+fastlane ios release_app
+```
+Create app, screenshot ,build and upload
 
 ----
 
