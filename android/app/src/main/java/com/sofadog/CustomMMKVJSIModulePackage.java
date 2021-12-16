@@ -1,4 +1,4 @@
-package dog.fa.so.app;
+package com.vidtreon.android;
 
 import com.facebook.react.bridge.JSIModulePackage;
 import com.facebook.react.bridge.JSIModuleSpec;

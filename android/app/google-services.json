@@ -8,6 +8,51 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:920734956176:android:01f196ee0b56f48f803615",
+        "android_client_info": {
+          "package_name": "com.vidtreon.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "920734956176-borjne6k6lfeagdhfv4m9h591mltheq1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vidtreon.android",
+            "certificate_hash": "f5ec51082db4277667a268b5a56e775bfb43a1c5"
+          }
+        },
+        {
+          "client_id": "920734956176-tc83loijmt4m8od94gfkhgj46jfbgbmk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6j8rc6rPzJEVGlynzc-cYb8cDPHvAmZE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "920734956176-tc83loijmt4m8od94gfkhgj46jfbgbmk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "920734956176-07botff27cs9nrr3g3ohmrj6t1nvcno4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "dog.fa.so.app",
+                "app_store_id": "1510957190"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:920734956176:android:3ca4d762d8be6e6b803615",
         "android_client_info": {
           "package_name": "dog.fa.so.app"
@@ -20,6 +65,14 @@
           "android_info": {
             "package_name": "dog.fa.so.app",
             "certificate_hash": "0ee386e883aa8dacf7a04490d494c646edd52072"
+          }
+        },
+        {
+          "client_id": "920734956176-8girotrdr7srg0ll65ra112k59q6mqs0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dog.fa.so.app",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
           }
         },
         {

@@ -132,7 +132,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "dog.fa.so.app"
+        applicationId "com.vidtreon.android"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 241

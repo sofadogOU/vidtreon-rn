@@ -1,4 +1,4 @@
-package dog.fa.so.app; 
+package com.vidtreon.android; 
 
 import android.graphics.Color;
 import android.os.Bundle;

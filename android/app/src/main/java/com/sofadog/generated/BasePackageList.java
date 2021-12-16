@@ -1,4 +1,4 @@
-package dog.fa.so.app.generated;
+package com.vidtreon.android.generated;
 
 import java.util.Arrays;
 import java.util.List;
