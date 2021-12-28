@@ -6,8 +6,8 @@
   <color name="center_gradient">#28004d</color>
   <color name="end_gradient">#040007</color>
   <!-- Logo BG Gradient for launcher icon -->
-  <color name="logo_start_gradient">#5800BF</color>
-  <color name="logo_end_gradient">#FD3D9F</color>
+  <color name="logo_start_gradient">#000000</color>
+  <color name="logo_end_gradient">#000000</color>
 
 </resources>
 

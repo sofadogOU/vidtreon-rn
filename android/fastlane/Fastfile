@@ -41,7 +41,17 @@ end
      build_type: "Release"
    )
  end
-
+ desc "Upload release app to huawei app gallery storage"
+ lane :huawei_Upload do
+  huawei_appgallery_connect(
+    client_id: "787636490661284672",
+    client_secret: "A531BC68A34A2E55D3A6CCA844FD18F04445FB354C2DFBD4472BF08E6BE4598F",
+    app_id: "105221769",
+    is_aab: true,
+    apk_path: "/Users/apple/vidtreon-rn-/android/app/build/outputs/bundle/release/app-release.aab",
+    submit_for_review: false,
+  )
+end
   desc "Deploy a new version to the Google Play"
   lane :deploy do
     #1
@@ -52,5 +62,7 @@ end
     upload_to_play_store(skip_upload_apk: true, track: 'internal',
     release_status: 'draft',
     aab: '/Users/apple/vidtreon-rn-/android/app/build/outputs/bundle/release/app-release.aab')
+    #4
+    huawei_Upload
   end
 end

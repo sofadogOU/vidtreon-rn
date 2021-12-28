@@ -1,5 +1,6 @@
 #import "AppDelegate.h"
 
+
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
@@ -18,6 +19,7 @@
 #import "RNBootSplash.h"
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <AGConnectCore/AGConnectCore.h>
 
 #if defined(FB_SONARKIT_ENABLED) && __has_include(<FlipperKit/FlipperClient.h>)
 #import <FlipperKit/FlipperClient.h>
@@ -76,6 +78,7 @@ static void InitializeFlipper(UIApplication *application) {
   [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
 
+  [AGCInstance startUp];// Initialization
   return YES;
 }
 

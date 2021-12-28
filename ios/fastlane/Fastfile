@@ -1,5 +1,4 @@
 
-
 default_platform(:ios)
 
 platform :ios do
@@ -13,23 +12,19 @@ desc "Sync certificates"
     match({readonly: true,type:"appstore"})
   end
 
-
 desc "Create ipa"
   lane :build do
   sync_profiles
-
-    # Increases the build number by 1
-    # increment_build_number
-    gym
+  # increment_build_number
+  gym
 
   end
 desc "Upload to TestFlight"
   lane :beta do
     build
     cert
-    sigh(force: true)
-    pilot  
-    # pilot(ipa: "fastlane/builds/sofadog.ipa") 
+    sigh(force: true)  
+    pilot(ipa: "fastlane/builds/sofadog.ipa")
   end
 desc "Take screenshots"
   lane :screenshot do

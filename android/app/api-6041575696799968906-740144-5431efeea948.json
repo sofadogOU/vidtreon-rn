@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "api-6041575696799968906-740144",
+  "private_key_id": "5431efeea94887d8af962d73f7eb69cd57ba9e9c",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCum0nxBHlGVv5+\nyAjp+PabZklFbN4iWlA70+ass6u2v/K4W6FuKB+vtwHuRhxWoUsAA/9cwJDLU6Ng\n2XyLnCilZ7Qc8bE2DY75YcUM6BK438cmSoiKZsgC96B8jy7UorGRPdhJXvhvJjr8\nIpmWtrVCOl2AhQ50tZkuG1jiMP1AGRAXYBw8TTvTHMNGODqdjXz5Bc0hSDGVhOnX\n/58seb+7UNNBzcvirpcE383AqznkUTE7YD0uy+do0cwE1B9Fy0oGvTr/VdkiNfze\nbp0jMuN8Y9I8zBTvjgIEDM0W6Ts1YOKirDwYIExp3JWI8VyqzecNahY+O9ZzrqSX\nLGkhUb7HAgMBAAECggEACmKeIUG83Nwrwuqu7Qurz05kKUbyZ2SrxQMzgy4klngQ\nPbrlfSHR0Ke3664r3VM2nMegFqo1coKFAyusZrlhCYWDhv0xJx/jUx3nlH7xLiHR\nPIvOVz0JxHNqDj6N8IPEv/jHtoV5jVLey0RbkkVHvqquCQjg9Twf4kgqHzn+tiMu\nCrel/2ujsajuwo4NwJqrNBFUroV1ZcGllnk+8QfRtdakOQuNv8k+ZnEGz0D+2j1t\nWWWLAM3S7EdsCgxeJYVGmHuWPSgiWjrYzRsBGmtOitHlf2HR6FynhdD6/RqhhK7p\nEG83MYqIYkGm6q+zB36F24RW5K9FHW1/SLsScL4IsQKBgQD2Kbr2n3sXzo+CqFaT\notKqN2zJ74XU8ZVWDiWjvYTC93t9EJ51ogfZVdtqDxhWkacHETlDYM7myG5siBJF\n56icWy87sDGGkmIDM0dEg+XgnstB2Y9bh47iuVWywr9w+1KIOGgQUBJzN4OREkxo\n7XHNq3jsuQcmPjUJ67o4ODxOvQKBgQC1lYetfTCB+ocuyW+e7IQxzgpy+4CxR+w0\njWBCea18EKZPQE4FQNlMWYvcH2UKQKbGz3ZqesowKxIL++Bw0iepe5mj11Oj+XxM\nKLyLn6r+hdNjQDY0Exuh9B95BrErmgtZRqb4X8fYGBNTQDmoh4kxz5sZ9C9yj2i+\npPyOcYZN0wKBgECDv1RTh9c9c68ynz4iNkQWMpTaCaE9j332RzcavGi8o8irSlxa\nEuSK8+5f9mj502Suxus5vAAQF6CqKN/ZTv9rhn2GN/Sk+LsN/WefiefMtkiT1FaQ\nuIoDOMqY78OUmpTI870Sv0MjEYA743q8gE7+2bpw48bKFux6s1t4oZWhAoGAOFkT\nhlmv4NXOd01ZDvcUOqRWh8HV+K159gDdGyPJGxPLmBI7Y9Pw2ol7Ji6z2w+e8VjV\nxUsfTP1Al2ltB3Wfiy9oyPf744l68eM+RxGgLWV36He3mkdHruUjkxnphr9BwE11\naOPIDx3BeXcXrV2JzGRBHDezNZidB3QJT2aZJ7MCgYEA5ZvqPcpjycDeKndqbMtZ\n5VO5U2wcc1mwuUwSdhQUckwK+oBg81GCMpkFS0JLPwlLZTn3S+iC9UY3R34qdmIS\nghQAdawRHd0f+WWtDkDgih1ZqLlQcIvM7VRY8EcE+PKGX1VbmCDFTNfkaWwap0yG\n4nm2vF4TSl2biIKf+uwfXao=\n-----END PRIVATE KEY-----\n",
+  "client_email": "fastlane-vidtreon@api-6041575696799968906-740144.iam.gserviceaccount.com",
+  "client_id": "105559109571878510321",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/fastlane-vidtreon%40api-6041575696799968906-740144.iam.gserviceaccount.com"
+}

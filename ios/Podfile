@@ -10,6 +10,10 @@ target 'sofadog' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+  # add the AGC core pod 
+    pod "AGConnectCore" 
+  # add pods for any other desired AGC services
+
   # Uncomment the code below to enable Flipper.
   #
   # You should not install Flipper in CI environments when creating release
