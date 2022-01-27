@@ -12,6 +12,29 @@ const nonDsaApi = axios.create({
   timeout: 20000,
 })
 
+api.interceptors.request.use(config => {
+  // perform a task before the request is sent
+  console.log('Request was sent $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$');
+  console.log(config,"config","&&7&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+
+  return config;
+}, error => {
+  // handle the error
+  return Promise.reject(error);
+});
+
+api.interceptors.response.use((response) => {
+  // do something with the response data
+  console.log('Response was received +++++++++++++++++++++++++++++++++++++++++++');
+  console.log(response);
+  console.log('Response was received +++++++++++++++++++++++++++++++++++++++++++');
+
+  return response;
+}, error => {
+  // handle the response error
+  return Promise.reject(error);
+});
+
 const endPoints = (pathParam?: string) =>
   Object.freeze({
     categories: 'categories',
@@ -40,6 +63,7 @@ const endPoints = (pathParam?: string) =>
     newsItemPublish: `news_items/${pathParam}/push_to_feed`,
     newsItemUnpublish: `news_items/${pathParam}/remove_from_feed`,
     searchChannels: `search/channels`,
+    checkDeviceCode : `checkDeviceCode`
   })
 
 /** Convert keys of endPoints object

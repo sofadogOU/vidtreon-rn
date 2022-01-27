@@ -23,5 +23,6 @@ export * from './use-replies.hook'
 export * from './use-reporting.hook'
 export * from './use-news-items.hook'
 export * from './use-search.hook'
+export * from './use-devicecode.hook'
 
 export * from './api.typings'

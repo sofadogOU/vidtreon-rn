@@ -87,7 +87,7 @@ export const feeds = ({ feeds }: FeedsSchema): Channel[] =>
 export const feed = ({ feed }: { feed: FeedSchema }): Channel => _feed(feed)
 
 const _video = (item: VideoSchema): Video => {
-  const views = item.engagements.total_views || 0
+  const views = item.engagements?.total_views || 0
   const formatter = views < 1000000 ? '0a' : '0.0a'
   const viewCount = numeral(views).format(formatter)
   return {
@@ -99,8 +99,8 @@ const _video = (item: VideoSchema): Video => {
     posterUrl: item.thumbnails[0].url,
     uploaded: item.created_at,
     viewCount,
-    likes: `${item.engagements.total_likes}`,
-    liked: !!item.engagements.liked,
+    likes: `${item.engagements?.total_likes}`,
+    liked: !!item.engagements?.liked,
     duration: item.duration,
     seekPosition: item.watched_history
       ? calcProgressPerc(item.watched_history?.progress, item.duration)
@@ -113,9 +113,9 @@ const _video = (item: VideoSchema): Video => {
       price: item.channel.subscription_price,
       avatarUrl: item.channel.thumbnail.image_url,
       coverUrl: item.channel.cover.image_url,
-      followerCount: item.channel.engagements.total_subscribers,
+      followerCount: item.channel.engagements?.total_subscribers,
       categories: item.channel.category_ids,
-      subscribed: item.channel.engagements.subscribed || false,
+      subscribed: item.channel.engagements?.subscribed || false,
     },
   }
 }

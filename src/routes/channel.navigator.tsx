@@ -9,6 +9,7 @@ enableScreens()
 const Stack = createNativeStackNavigator<ChannelStackParamList>()
 
 export const ChannelNavigator = () => {
+
   return (
     <Stack.Navigator
       screenOptions={{

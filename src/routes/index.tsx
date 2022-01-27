@@ -46,6 +46,55 @@ export const AppNavigator = () => {
 
   const { currentCredentials } = useStore(getAuthState)
 
+  async function deviceCodeCheck() {
+    try{
+    const response = await fetch(`http://localhost:3000/device/1`);
+    const json = await response.json();
+    store.setLoginData(json);
+    console.log(json,"json data");
+    if(json.result=="ok1"){
+      store.setDeviceCode(true);
+     // store.isVisitor(true);
+     let subcription =true;
+    
+     
+     store.setSubcription(subcription);
+    }else{
+      store.setDeviceCode(false);
+      let subcription = true ;
+      store.setSubcription(subcription);
+    }
+    
+    //return json;
+    //console.log(json);
+    }
+    catch(err) {
+      throw err;
+      console.log(err);
+    }
+  }
+
+//   const getData = async () => {
+//     await fetch('http://localhost:3000/device/1',{
+//          method: 'GET',
+//          headers: {
+//              Accept: 'application/json',
+//              'Content-Type': 'application/json'
+//          }
+//      })
+//      .then((response) => {
+//          console.log('Response:')
+//          console.log(response,"999999999")
+//          let loginData = response.json();
+//          store.setLoginData(response);
+//          console.info('=================================')
+//      })
+//      .catch(err => console.error(err));
+ 
+//  } 
+
+  
+
   const logout = React.useCallback(async () => {
     // if (store.tokenDomain === 'facebook') {
     //   facebookAuth.logout()
@@ -131,6 +180,14 @@ export const AppNavigator = () => {
    */
 
   React.useEffect(() => {
+     let loginData  = deviceCodeCheck();
+    
+     console.log(loginData,"dummy data");
+      let    deviceStatusValue  =true;
+      
+   
+    
+     
     if (deeplink.info) {
       setReady(true)
     }

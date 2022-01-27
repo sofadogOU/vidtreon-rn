@@ -11,11 +11,20 @@ interface SessionStore extends Record<string, unknown> {
   user: User | null
   theme: ColorSchemeName
   isVisitor: boolean
+  loginData :any
+  subcription:boolean
+  isDeviceCode:boolean
+  connectionInfo:any
   setToken: (token: string | null) => void
   setTokenDomain: (domain: SocialDomains | 'email' | null) => void
   setUser: (user: User | null) => void
   setTheme: (theme: ColorSchemeName) => void
   setVisitor: (isVisitor: boolean) => void
+  setSubcription: (isSubcription: boolean) => void
+  setLoginData : (data:any) => void
+  setDeviceCode: (isDeviceCode: boolean) => void
+  setConnectionInfo: (connectionInfo:any) => void
+  
 }
 
 const persist =
@@ -43,6 +52,12 @@ export const useStore = create(
     user: null,
     theme: defaultTheme,
     isVisitor: false,
+    ç : false,
+   loginData :null,
+   subcription:false,
+   isDeviceCode:false,
+   connectionInfo:null,
+
     setToken: (payload: string | null) => {
       const state = get()
       set({ ...state, token: payload })
@@ -62,6 +77,22 @@ export const useStore = create(
     setVisitor: (payload: boolean) => {
       const state = get()
       set({ ...state, isVisitor: payload })
+    },
+    setSubcription: (payload: boolean) => {
+      const state = get()
+      set({ ...state, subcription: payload })
+    },
+    setLoginData: (payload: any) => {
+      const state = get()
+      set({ ...state, loginData: payload })
+    },
+    setDeviceCode: (payload: boolean) => {
+      const state = get()
+      set({ ...state, isDeviceCode: payload })
+    },
+    setConnectionInfo: (payload: any) => {
+      const state = get()
+      set({ ...state, connectionInfo: payload })
     },
   }))
 )

@@ -6,6 +6,7 @@ import Spinner from 'react-native-spinkit'
 import * as Sentry from '@sentry/react-native'
 import { MotiView } from 'moti'
 import Haptics from 'react-native-haptic-feedback'
+import { Button } from '../../../components/buttons.component'
 
 import RNVideo, {
   LoadError,
@@ -55,29 +56,47 @@ export const VideoPlayerScreen = ({ navigation, route }: Props) => {
   const [videoId, setVideoId] = React.useState(route.params.id)
   const [repliesId, setRepliesId] = React.useState<string | number>(-1)
 
-  const doLike = useLike()
-  const doUnlike = useUnlike()
-  const report = useReporting()
-  const updateWatchlist = useUpdateWatchlist()
-  const share = useShareProvider()
+  // const doLike = useLike()
+  // const doUnlike = useUnlike()
+  // const report = useReporting()
+  // const updateWatchlist = useUpdateWatchlist()
+  // const share = useShareProvider()
+
+  const doLike = []
+  const doUnlike = []
+  const report = []
+  const updateWatchlist =[]
+  const share =[]
 
   const { data: videoData } = useVideo({ videoId })
-  const { data: subsciptionData } = useSubscriptions()
-  const { data: relatedVideosData } = useVideos({
-    videoId,
-    limit: 3,
-    type: 'related',
-  })
+  // const { data: subsciptionData } =  useSubscriptions()
+  // const { data: relatedVideosData } = useVideos({
+  //   videoId,
+  //   limit: 3,
+  //   type: 'related',
+  // })
 
-  const { data: commentData, refetch: refetchComments } = useComments({
-    ref: [videoId],
-    resourceType: 'video',
-  })
+  const subsciptionData= [];
 
-  const { data: repliesData, refetch: refetchReplies } = useReplies({
-    ref: [videoId, repliesId],
-    resourceType: 'video',
-  })
+  // const videoData = {"channel": {"avatarUrl": "https://sofadog-storage.s3.eu-west-2.amazonaws.com/8quc9o2e5ilcik4w9mcd5id423oy", "categories": undefined, "coverUrl": "https://sofadog-storage.s3.eu-west-2.amazonaws.com/ez2yfm0onujhtafuhm5z6nq8y363", "description": "Kõige tervislikumad ja maitsvamad retseptid, mis nõuavad minimaalselt aega ja pakuvad maksimaalselt naudingut! Patustada saab ka tervislikult, suhkruvabalt, gluteenivabalt ja täistaimselt!", "feedId": 1, "followerCount": 5, "id": "1", "name": "Paljas Porgand", "price": 100, "subscribed": false}, "coverUrl": "https://cdn.so.fa.dog/passion-thumbnails-prod/thumbnail-c52789f3-d8cb-43cd-84fb-590461bec096-a33698b3ccaa.jpg", "description": "Ei, pasta ei pea olema kohutav su vöökohale ja tervisele — sisaldama nisu, rasva, juustu, liha jmt. Pasta võib olla ka antioksüdandipauk ja vöökoha parim sõber, vähemalt siis, kui minu retsepti järgida!", "duration": 217790, "id": "1158", "liked": false, "likes": "0", "posterUrl": "https://cdn.so.fa.dog/passion-thumbnails-prod/thumbnail-c52789f3-d8cb-43cd-84fb-590461bec096-a33698b3ccaa.jpg", "seekPosition": undefined, "title": "Eriti küüslaugune tatrapasta", "uploaded": "2022-01-05T18:09:42.234Z", "videoUrl": "https://cdn.so.fa.dog/passion-clips-prod/c52789f3-d8cb-43cd-84fb-590461bec096-any.m3u8", "viewCount": "1"}
+
+  const test = () => {
+    console.log(videoData,"videoData lll");
+    
+  }
+
+ 
+  
+
+  // const { data: commentData, refetch: refetchComments } = useComments({
+  //   ref: [videoId],
+  //   resourceType: 'video',
+  // })
+
+  // const { data: repliesData, refetch: refetchReplies } = useReplies({
+  //   ref: [videoId, repliesId],
+  //   resourceType: 'video',
+  // })
 
   const getUserState = React.useCallback(
     state => ({
@@ -92,9 +111,9 @@ export const VideoPlayerScreen = ({ navigation, route }: Props) => {
   const [isPaused, setPaused] = React.useState(false)
   const [isMuted, setMuted] = React.useState(false)
   const [isEnded, setEnded] = React.useState(false)
-  const [commentCount, setCommentCount] = React.useState(
-    commentData?.length || 0
-  )
+  // const [commentCount, setCommentCount] = React.useState(
+  //   commentData?.length || 0
+  // )
   const [progress, setProgress] = React.useState(0)
   const [duration, setDuration] = React.useState(0)
   const [buffered, setBuffered] = React.useState(0)
@@ -106,30 +125,31 @@ export const VideoPlayerScreen = ({ navigation, route }: Props) => {
   const { appState } = useAppState({
     onBackground: () => {
       setPaused(true)
-      doWatchlistUpdate()
+      //doWatchlistUpdate()
     },
   })
 
   React.useEffect(() => {
+    //console.log("inside media player ");
     if (videoData) {
       setLikeCount(videoData.likes)
       setLiked(videoData.liked)
     }
   }, [videoData])
 
-  React.useEffect(() => {
-    refetchComments()
-  }, [videoId, refetchComments])
+  // React.useEffect(() => {
+  //   refetchComments()
+  // }, [videoId, refetchComments])
 
-  React.useEffect(() => {
-    if (repliesId !== -1) {
-      refetchReplies()
-    }
-  }, [videoId, repliesId, refetchReplies])
+  // React.useEffect(() => {
+  //   if (repliesId !== -1) {
+  //     refetchReplies()
+  //   }
+  // }, [videoId, repliesId, refetchReplies])
 
-  React.useEffect(() => {
-    setCommentCount(commentData?.length || 0)
-  }, [commentData])
+  // React.useEffect(() => {
+  //   setCommentCount(commentData?.length || 0)
+  // }, [commentData])
 
   const hasAuth = React.useCallback(
     (video: Video, subscriptions?: Channel[]) => {
@@ -187,7 +207,7 @@ export const VideoPlayerScreen = ({ navigation, route }: Props) => {
       },
     })
   }
-
+de
   const handlePremiumVideoPress = (feedId: string) => {
     Haptics.trigger('impactLight', k.hapticOptions)
     navigation.navigate('Channel', {
@@ -212,18 +232,18 @@ export const VideoPlayerScreen = ({ navigation, route }: Props) => {
     })
   }
 
-  const doWatchlistUpdate = () => {
-    if (videoData) {
-      updateWatchlist.mutate({
-        videoId,
-        progress: isEnded ? 0 : progress * 1000,
-        duration: videoData?.duration,
-      })
-    }
-  }
+  // const doWatchlistUpdate = () => {
+  //   if (videoData) {
+  //     updateWatchlist.mutate({
+  //       videoId,
+  //       progress: isEnded ? 0 : progress * 1000,
+  //       duration: videoData?.duration,
+  //     })
+  //   }
+  // }
 
   const handleDismiss = () => {
-    doWatchlistUpdate()
+  //  doWatchlistUpdate()
     navigation.pop()
   }
 
@@ -280,173 +300,173 @@ export const VideoPlayerScreen = ({ navigation, route }: Props) => {
     setShownScreen('Comments')
   }
 
-  const handleRepliesCommentLike = React.useCallback(
-    async (id: string, isLiked: boolean) => {
-      if (repliesId) {
-        if (isLiked) {
-          doLike.mutate({
-            ref: [videoId, id],
-            resourceType: 'comment',
-          })
-        } else {
-          doUnlike.mutate({
-            ref: [videoId, id],
-            resourceType: 'comment',
-          })
-        }
-      }
-    },
-    [videoId, repliesId]
-  )
+  // const handleRepliesCommentLike = React.useCallback(
+  //   async (id: string, isLiked: boolean) => {
+  //     if (repliesId) {
+  //       if (isLiked) {
+  //         doLike.mutate({
+  //           ref: [videoId, id],
+  //           resourceType: 'comment',
+  //         })
+  //       } else {
+  //         doUnlike.mutate({
+  //           ref: [videoId, id],
+  //           resourceType: 'comment',
+  //         })
+  //       }
+  //     }
+  //   },
+  //   [videoId, repliesId]
+  // )
 
-  const handleRepliesCommentReport = React.useCallback(
-    (id: string) => {
-      Alert.alert(
-        'Please Confirm',
-        'Are you sure you would like to report this comment?',
-        [
-          { text: 'Cancel' },
-          {
-            text: 'Yes',
-            onPress: async () => {
-              try {
-                if (repliesId) {
-                  const res = await report.mutateAsync({
-                    commentId: [id],
-                    reason: 'Innapropriate Comment',
-                  })
-                  if (res) {
-                    Alert.alert(
-                      'Thank you for flagging this comment',
-                      `We'll review the item shortly`
-                    )
-                  }
-                }
-              } catch (e) {
-                Alert.alert(
-                  'An error was encountered',
-                  `Please try again later`
-                )
-              }
-            },
-          },
-        ]
-      )
-    },
-    [repliesId]
-  )
+  // const handleRepliesCommentReport = React.useCallback(
+  //   (id: string) => {
+  //     Alert.alert(
+  //       'Please Confirm',
+  //       'Are you sure you would like to report this comment?',
+  //       [
+  //         { text: 'Cancel' },
+  //         {
+  //           text: 'Yes',
+  //           onPress: async () => {
+  //             try {
+  //               if (repliesId) {
+  //                 const res = await report.mutateAsync({
+  //                   commentId: [id],
+  //                   reason: 'Innapropriate Comment',
+  //                 })
+  //                 if (res) {
+  //                   Alert.alert(
+  //                     'Thank you for flagging this comment',
+  //                     `We'll review the item shortly`
+  //                   )
+  //                 }
+  //               }
+  //             } catch (e) {
+  //               Alert.alert(
+  //                 'An error was encountered',
+  //                 `Please try again later`
+  //               )
+  //             }
+  //           },
+  //         },
+  //       ]
+  //     )
+  //   },
+  //   [repliesId]
+  // )
 
-  const renderReplies = React.useMemo(
-    () =>
-      videoData && (
-        <VideoReplies
-          userId={user?.id}
-          onBackPress={handleBackPress}
-          items={repliesData || []}
-          onRepliesCommentLike={handleRepliesCommentLike}
-          commentingEnabled={hasAuth(videoData, subsciptionData)}
-          onRepliesCommentReport={handleRepliesCommentReport}
-        />
-      ),
-    [
-      repliesData,
-      handleRepliesCommentLike,
-      handleRepliesCommentReport,
-      videoData,
-      user?.id,
-      hasAuth,
-      subsciptionData,
-    ]
-  )
+  // const renderReplies = React.useMemo(
+  //   () =>
+  //     videoData && (
+  //       <VideoReplies
+  //         userId={user?.id}
+  //         onBackPress={handleBackPress}
+  //         items={repliesData || []}
+  //         onRepliesCommentLike={handleRepliesCommentLike}
+  //         commentingEnabled={hasAuth(videoData, subsciptionData)}
+  //         onRepliesCommentReport={handleRepliesCommentReport}
+  //       />
+  //     ),
+  //   [
+  //     repliesData,
+  //     handleRepliesCommentLike,
+  //     handleRepliesCommentReport,
+  //     videoData,
+  //     user?.id,
+  //     hasAuth,
+  //     subsciptionData,
+  //   ]
+  // )
 
   /*
    * Comments Methods
    */
 
-  const handleCommentsChange = React.useCallback(
-    () => (count: number) => {
-      setCommentCount(count)
-    },
-    []
-  )
+  // const handleCommentsChange = React.useCallback(
+  //   () => (count: number) => {
+  //     setCommentCount(count)
+  //   },
+  //   []
+  // )
 
-  const handleCommentPlay = React.useCallback(() => {
-    setPaused(true)
-  }, [])
+  // const handleCommentPlay = React.useCallback(() => {
+  //   setPaused(true)
+  // }, [])
 
-  const handleCommentsBackPress = React.useCallback(
-    () => setShownScreen('Player'),
-    []
-  )
+  // const handleCommentsBackPress = React.useCallback(
+  //   () => setShownScreen('Player'),
+  //   []
+  // )
 
-  const handleRepliesPress = (id: string) => {
-    setRepliesId(id)
-    setShownScreen('Replies')
-  }
+  // const handleRepliesPress = (id: string) => {
+  //   setRepliesId(id)
+  //   setShownScreen('Replies')
+  // }
 
-  const handleReportComment = React.useCallback((id: string) => {
-    Alert.alert(
-      'Please Confirm',
-      'Are you sure you would like to report this comment?',
-      [
-        { text: 'Cancel' },
-        {
-          text: 'Yes',
-          onPress: async () => {
-            try {
-              const res = await report.mutateAsync({
-                commentId: [id],
-                reason: 'Innapropriate Comment',
-              })
-              if (res) {
-                Alert.alert(
-                  'Thank you for flagging this comment',
-                  `We'll review the item shortly`
-                )
-              }
-            } catch (e) {
-              Alert.alert('An error was encountered', `Please try again later`)
-            }
-          },
-        },
-      ]
-    )
-  }, [])
+  // const handleReportComment = React.useCallback((id: string) => {
+  //   Alert.alert(
+  //     'Please Confirm',
+  //     'Are you sure you would like to report this comment?',
+  //     [
+  //       { text: 'Cancel' },
+  //       {
+  //         text: 'Yes',
+  //         onPress: async () => {
+  //           try {
+  //             const res = await report.mutateAsync({
+  //               commentId: [id],
+  //               reason: 'Innapropriate Comment',
+  //             })
+  //             if (res) {
+  //               Alert.alert(
+  //                 'Thank you for flagging this comment',
+  //                 `We'll review the item shortly`
+  //               )
+  //             }
+  //           } catch (e) {
+  //             Alert.alert('An error was encountered', `Please try again later`)
+  //           }
+  //         },
+  //       },
+  //     ]
+  //   )
+  // }, [])
 
   const isViewingComments = React.useMemo(() => {
     return shownScreen === 'Comments'
   }, [shownScreen])
 
-  const renderComments = React.useMemo(
-    () =>
-      videoData && (
-        <VideoComments
-          isShowing={isViewingComments}
-          videoId={videoId}
-          comments={commentData}
-          user={user}
-          onCommentPlay={handleCommentPlay}
-          onBackPress={handleCommentsBackPress}
-          commentingEnabled={hasAuth(videoData, subsciptionData)}
-          onCommentsChange={handleCommentsChange}
-          onRepliesPress={handleRepliesPress}
-          onReportComment={handleReportComment}
-        />
-      ),
-    [
-      commentData,
-      videoData,
-      subsciptionData,
-      hasAuth,
-      videoId,
-      user,
-      isViewingComments,
-      handleCommentsBackPress,
-      handleCommentPlay,
-      handleCommentsChange,
-      handleReportComment,
-    ]
-  )
+  // const renderComments = React.useMemo(
+  //   () =>
+  //     videoData && (
+  //       <VideoComments
+  //         isShowing={isViewingComments}
+  //         videoId={videoId}
+  //         comments={commentData}
+  //         user={user}
+  //         onCommentPlay={handleCommentPlay}
+  //         onBackPress={handleCommentsBackPress}
+  //         commentingEnabled={hasAuth(videoData, subsciptionData)}
+  //         onCommentsChange={handleCommentsChange}
+  //         onRepliesPress={handleRepliesPress}
+  //         onReportComment={handleReportComment}
+  //       />
+  //     ),
+  //   [
+  //     commentData,
+  //     videoData,
+  //     subsciptionData,
+  //     hasAuth,
+  //     videoId,
+  //     user,
+  //     isViewingComments,
+  //     handleCommentsBackPress,
+  //     handleCommentPlay,
+  //     handleCommentsChange,
+  //     handleReportComment,
+  //   ]
+  // )
 
   const renderPlayer = (
     <VideoPlayer
@@ -484,6 +504,14 @@ export const VideoPlayerScreen = ({ navigation, route }: Props) => {
   return (
     <>
       <Container>
+      <Button
+                type="social"
+              
+                onPress={() => test()}
+              >
+                <Button.Icon name="facebook" />
+                <Button.Label>{`Facebook`}</Button.Label>
+              </Button>
         {videoData ? (
           <>
             {renderPlayer}
@@ -506,13 +534,13 @@ export const VideoPlayerScreen = ({ navigation, route }: Props) => {
                   description={videoData.description}
                   liked={!!isLiked}
                   likes={likeCount}
-                  shares={videoData.shares}
-                  uploaded={videoData.uploaded}
-                  commentCount={commentCount}
-                  relatedVideos={filterPremium(
-                    relatedVideosData,
-                    subsciptionData
-                  )}
+                  // shares={videoData.shares}
+                  // uploaded={videoData.uploaded}
+                  // commentCount={commentCount}
+                  // relatedVideos={filterPremium(
+                  //   relatedVideosData,
+                  //   subsciptionData
+                  // )}
                   /* video effecting methods */
                   onPlaybackChange={handlePlaybackChange}
                   onMuteChange={() => setMuted(v => !v)}
@@ -524,20 +552,16 @@ export const VideoPlayerScreen = ({ navigation, route }: Props) => {
                     setVideoId(id)
                   }}
                   onPremiumVideoPress={handlePremiumVideoPress}
-                  onLikePress={
-                    hasAuth(videoData, subsciptionData)
-                      ? handleLikePress
-                      : undefined
-                  }
+                  onLikePress={handleSharePress}
                   onSharePress={handleSharePress}
                   onChannelPress={handleChannelPress}
                   onViewCommentsPress={handleViewCommentsPress}
                   onClose={handleDismiss}
-                  isSubscribed={hasAuth(videoData, subsciptionData)}
+                  isSubscribed={true}
                 />
               </Slide>
-              <Slide>{renderComments}</Slide>
-              <Slide>{renderReplies}</Slide>
+              {/* <Slide>{renderComments}</Slide>
+              <Slide>{renderReplies}</Slide> */}
             </ViewSlider>
           </>
         ) : (

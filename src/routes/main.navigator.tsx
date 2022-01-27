@@ -33,15 +33,15 @@ const MainNavigator = () => {
       }}
     >
       {/* <Stack.Screen
-        name="ChannelDetail"
+        name="Onboarding"
         component={ChannelDetailScreen}
         options={{
           stackPresentation: 'fullScreenModal',
         }}
       /> */}
-      <Stack.Screen
-        name={store.isVisitor? "ChannelDetail" : "Onboarding"}
-        component={ store.isVisitor? ChannelDetailScreen: OnboardingScreen}
+      
+      <Stack.Screen  name = {store.isDeviceCode? "ChannelDetail" : "Onboarding"}
+        component={ store.isDeviceCode? ChannelDetailScreen: OnboardingScreen}
         options={{
           stackPresentation: 'fullScreenModal',
         }}

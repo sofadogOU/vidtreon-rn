@@ -8,6 +8,7 @@ export const isAndroid = Platform.OS === 'android'
 export const isIOS = Platform.OS === 'ios'
 export const isSimulator = () => isEmulator()
 
+
 const statusBarHeight = StatusBar.currentHeight ?? 0
 export const navBarHeight = isAndroid
   ? screenHeight - (windowHeight + statusBarHeight)
@@ -72,8 +73,12 @@ export const iapItems = {
 }
 
 export const baseUrl = __DEV__
-  ? 'https://x.so.fa.dog/dsa'
-  : 'https://x.so.fa.dog/dsa'
+  ? 'http://localhost:3000'
+  : 'http://localhost:3000'
+
+// export const baseUrl = __DEV__
+//   ? 'https://x.so.fa.dog/dsa'
+//   : 'https://x.so.fa.dog/dsa'
 
 export const nonDsaBaseUrl = __DEV__
   ? 'https://x.so.fa.dog'

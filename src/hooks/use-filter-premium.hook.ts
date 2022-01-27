@@ -5,6 +5,7 @@ import { filterPremiumVideos } from '@/utils/video-helpers.util'
 
 export const useFilterPremium = () =>
   React.useCallback((videos?: Video[], subscriptions?: Channel[]) => {
+  //  console.log(videos,"videos useFilterPremium");
     if (videos && subscriptions) {
       return filterPremiumVideos(videos, subscriptions)
     } else {

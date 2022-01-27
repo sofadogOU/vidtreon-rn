@@ -55,6 +55,7 @@ export const VideoCarousel = ({
   const { width: itemWidth, height: itemHeight } = calcSize(layout, height)
 
   React.useEffect(() => {
+    console.log(isFeature,"items isFeature");
     if (isMounted()) {
       setData(dataProvider.cloneWithRows(items))
     }
@@ -67,11 +68,13 @@ export const VideoCarousel = ({
       dim.height = itemHeight
     }
   )
-
+//isPremium={item?.isPremium}
   const renderRow = (type: string | number, item: Video) => {
+    //console.log(item,"item data ");
     const handleItemPress = () => onItemPress(item.id)
     const handleDetailPress = () => onDetailPress?.(item)
     const handleChannelPress = () => onChannelPress?.(item.channel.id)
+    item.isPremium = false;
     return (
       <VideoWidget
         key={item.id}

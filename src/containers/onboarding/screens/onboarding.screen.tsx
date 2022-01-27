@@ -27,6 +27,7 @@ import {
   OnboardingSlider,
   LoadingOverlay,
   SignupForm,
+  DeviceCode,
   RegisterCredentials,
   LoginCredentials,
 } from "@/components";
@@ -209,19 +210,29 @@ export const OnboardingScreen = ({ navigation, route }: Props) => {
 
   return (
     <>
-      <AuthSlide
+      {/* <AuthSlide
         onDismiss={handleClose}
         onSocialAuth={handleSocialAuth}
-        onShowForm={() => setShowForm(true)}
-      />
+        onShowForm={()
+          
+          => setShowForm(true)}
+      /> */}
 
-      <SignupForm
+
+
+        <DeviceCode
+        isVisible={showForm}
+        onClose={() => setShowForm(true)}
+        showSpinner={showSpinner}
+         />
+
+      {/* <SignupForm
         isVisible={showForm}
         onClose={() => setShowForm(false)}
         onLogin={handleLogin}
         onRegister={handleRegister}
         showSpinner={showSpinner}
-      />
+      /> */}
       {/* <LoadingOverlay isVisible={showSpinner} /> */}
     </>
   );

@@ -8,6 +8,7 @@ import Spinner from 'react-native-spinkit'
 import kebabCase from 'lodash/kebabCase'
 import faker from 'faker'
 import Toast from 'react-native-toast-message'
+import { Button } from '../../../components/buttons.component'
 
 import {
   ChannelStackNavigationProp,
@@ -75,16 +76,20 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
 
 
   React.useEffect(() => {
+   // alert("kkk");
+    
     if(MMKV){
       MMKV.clearMemoryCache();
     }
-   getchannelIdFromApi()
-  })
+  // getchannelIdFromApi()
+  },[])
 
   const getchannelIdFromApi = () => {
+    //alert("channel-details-page");
     fetch('http://settings.vidtreon.com/')
    .then((response) => response.json())
    .then((rsn) => {
+     console.log(rsn,"response");
      setchannelId(String(rsn.channel_id))
      setbgcolor(String(rsn.button_color))
      setBtnColor(String(rsn.mobile_button_color))
@@ -98,7 +103,8 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
    });
 };
 
-  const { data: balance } = useBalance()
+  // const { data: balance } = useBalance()
+  const balance = 0;
   const { user } = useStore(getUserState)
   const channelModalRef = React.useRef<BottomSheet>(null)
   const videoModalRef = React.useRef<BottomSheet>(null)
@@ -108,19 +114,36 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
 
   const store = useStore()
 
-  const subscribe = useSubscribe()
-  const { data: feedData, refetch: refetchFeed } = useFeed({
-    feedId: route?.params?.id ? route?.params?.id  : channelId,
-  })
-  const { data: subscriptions } = useSubscriptions()
-  const { data: allVideoData } = useVideos({
-    feedId:route?.params?.id ? route?.params?.id  : channelId,
-    limit: 1000,
-  })
-  const { data: latestVideoData } = useVideos({
-    type: 'latest',
-    feedId: route?.params?.id ? route?.params?.id  : channelId,
-  })
+  // const subscribe = useSubscribe()
+  // const { data: feedData, refetch: refetchFeed } = useFeed({
+  //   feedId: route?.params?.id ? route?.params?.id  : channelId,
+  // })
+
+  const feedData = {
+    "avatarUrl": "https://sofadog-storage.s3.eu-west-2.amazonaws.com/8quc9o2e5ilcik4w9mcd5id423oy",
+    "categories": "",
+    "coverUrl": "https://sofadog-storage.s3.eu-west-2.amazonaws.com/ez2yfm0onujhtafuhm5z6nq8y363",
+    "description": "Kõige tervislikumad ja maitsvamad retseptid, mis nõuavad minimaalselt aega ja pakuvad maksimaalselt naudingut! Patustada saab ka tervislikult, suhkruvabalt, gluteenivabalt ja täistaimselt!",
+    "feedId": 1,
+    "followerCount": null,
+    "id": "1",
+    "name": "Paljas Porgand",
+    "price": 100,
+    "subscribed": false
+  }
+  const subscriptions:any= [];
+  // const { data: subscriptions } = useSubscriptions()
+  // const { data: allVideoData } = useVideos({
+  //   feedId:route?.params?.id ? route?.params?.id  : channelId,
+  //   limit: 1000,
+  // })
+  // const { data: latestVideoData } = useVideos({
+  //   type: 'latest',
+  //   feedId: route?.params?.id ? route?.params?.id  : channelId,
+  // })
+
+  const allVideoData = store.loginData.data.VideoInfo;
+  const latestVideoData = store.loginData.data.VideoInfo;
 
   const linkStyle = React.useMemo(
     () => ({ color: theme.primary.tint }),
@@ -129,7 +152,15 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
 
   React.useEffect(() => {
     const token = store.token
+   
+    //alert("channel -page");
+   
+   // console.log(testkkk,'testkkk',balance);
   }, [store])
+
+  const test = () =>{
+    console.log(allVideoData,"allVideoData1");
+  }
 
   const isSubscriber = React.useCallback(
     (feed: Channel, subscriptions?: Channel[]) => {
@@ -206,13 +237,22 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
   const onBalancePress = () => {
     navigation.dangerouslyGetParent()?.navigate('Shop')
   }
+
+  // const handleVideoPress = (id: string) => {
+  //   console.log(id,"video id ");
+  //   // navigation.dangerouslyGetParent()?.navigate('MediaPlayer', {
+  //   //   id,
+  //   navigation.navigate('MediaPlayer', {
+  //     id,
+  //   })
+  // }
   
 
   const handleVideoPress = (id: string) => {
-    navigation.dangerouslyGetParent()?.navigate('MediaPlayer', {
+    console.log(id,"video id ");
+    
+    navigation.navigate('MediaPlayer', {
       id,
-    // navigation.navigate('MediaPlayer', {
-    //   id,
     })
   }
 
@@ -276,7 +316,7 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
 
   return (
     <>
-      {feedData && latestVideoData && allVideoData &&  (
+      {latestVideoData && allVideoData &&  (
         <ParallaxScrollView
           coverUrl={feedData.coverUrl}
           title={feedData.name}
@@ -313,6 +353,16 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
                 </BodyText>
               ) : null}
             </Section>
+
+            {/* <Button
+                type="social"
+              
+                onPress={() => test()}
+              >
+                <Button.Icon name="facebook" />
+                <Button.Label>{`Facebook`}</Button.Label>
+              </Button> */}
+            
             {latestVideoData.length > 0 && (
               <Section style={{ marginTop: k.sizes.defPadding }}>
                 <SectionTitle icon="latest">
@@ -334,7 +384,7 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
                 />
               </Section>
             )}
-            {latestVideoData.length > 1 && (
+            {/* {latestVideoData.length > 1 && (
               <Section>
                 <SectionTitle icon="popular">
                   {i18n.t('channel_section3')}
@@ -354,8 +404,8 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
                   hideAvatars
                 />
               </Section>
-            )}
-            {allVideoData.length > 1 && (
+            )} */}
+            {/* {allVideoData.length > 1 && (
               <Section style={{ marginBottom: 0 }}>
                 <SectionTitle icon="video">
                   {i18n.t('channel_section4')}
@@ -376,7 +426,7 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
             {!allVideoData ||
               (allVideoData?.length === 0 && (
                 <EmptyStateView title={i18n.t('channel_empty')} />
-              ))}
+              ))} */}
           </Container>
         </ParallaxScrollView>
       )}

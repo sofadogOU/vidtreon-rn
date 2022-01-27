@@ -82,6 +82,7 @@ export const HomeScreen = ({ navigation }: Props) => {
   const notifications = useNotificationProvider()
 
   React.useEffect(() => {
+    alert("Home - Screen ");
     deeplink.bootstrap()
   }, [deeplink])
 
