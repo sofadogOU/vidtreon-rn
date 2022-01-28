@@ -18,6 +18,7 @@ import {
 import { SplashScreen } from '@/containers/splash'
 import MainNavigator from './main.navigator'
 import { SocialDomains } from '@/typings/Requests'
+import * as k from '@/utils/constants'
 // import { AppleRequestResponse } from '@invertase/react-native-apple-authentication'
 
 export const AppNavigator = () => {
@@ -48,7 +49,10 @@ export const AppNavigator = () => {
 
   async function deviceCodeCheck() {
     try{
-    const response = await fetch(`http://localhost:3000/device/1`);
+    let url = k.baseUrl+"/device/1"
+    console.log(url,"=====88888");
+    // const response = await fetch(`http://localhost:3000/device/1`);
+    const response = await fetch(url);
     const json = await response.json();
     store.setLoginData(json);
     console.log(json,"json data");

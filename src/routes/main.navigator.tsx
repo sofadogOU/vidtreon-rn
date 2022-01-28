@@ -16,6 +16,7 @@ import {
   useStore,
 } from '@/hooks'
 import { ChannelDetailScreen } from '@/containers/channel'
+import NetInfo from "@react-native-community/netinfo";
 enableScreens()
 const Stack = createNativeStackNavigator<MainStackParamList>()
 
@@ -23,6 +24,29 @@ const Stack = createNativeStackNavigator<MainStackParamList>()
 const MainNavigator = () => {
   const store = useStore()
   const insets = useSafeAreaInsets()
+  const  unsubscribe=() => {
+    
+    NetInfo.fetch().then(state => {
+      console.log(state,"connection data ");
+      store.setConnectionInfo(state);
+      // if(state.isConnected === store.connectionInfo.isConnected){
+      //   store.setConnectionInfo(state);
+      // }
+     
+    })
+  };
+
+  React.useEffect(() => {
+
+    const myTimeout = setTimeout(unsubscribe, 5000);
+
+    return () => {
+      clearTimeout(myTimeout);
+    }
+
+   // console.log(store.connectionInfo,"connectioninfo");
+   
+  },[store]);
   return (
     <Stack.Navigator
       screenOptions={{
@@ -45,6 +69,7 @@ const MainNavigator = () => {
         options={{
           stackPresentation: 'fullScreenModal',
         }}
+        initialParams={{ itemId: store.connectionInfo }}
       />
       <Stack.Screen name="Main" component={DrawerNavigation} />
       <Stack.Screen

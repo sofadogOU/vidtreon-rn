@@ -43,8 +43,10 @@ import {
   VideoGalleryList,
   EmptyStateView,
   toastConfig,
-  UserInfo
+  UserInfo,
+  Offline
 } from '@/components'
+
 
 interface Props {
   navigation: ChannelStackNavigationProp<'ChannelDetail'>
@@ -56,6 +58,7 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
   const i18n = useTranslation()
   const share = useShareProvider()
   const filterPremium = useFilterPremium()
+  const store = useStore()
 
   const [channelId, setchannelId] = React.useState("")
   const [bgcolor, setbgcolor] = React.useState("")
@@ -82,7 +85,7 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
       MMKV.clearMemoryCache();
     }
   // getchannelIdFromApi()
-  },[])
+  },[store])
 
   const getchannelIdFromApi = () => {
     //alert("channel-details-page");
@@ -112,7 +115,7 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
 
   const [isBusy, setBusy] = React.useState(false)
 
-  const store = useStore()
+
 
   // const subscribe = useSubscribe()
   // const { data: feedData, refetch: refetchFeed } = useFeed({
@@ -316,7 +319,14 @@ export const ChannelDetailScreen = ({ navigation, route }: Props) => {
 
   return (
     <>
-      {latestVideoData && allVideoData &&  (
+      {  !store.connectionInfo.isConnected && 
+      
+      <Offline
+      
+       />
+
+      }  
+      { store.connectionInfo.isConnected && latestVideoData && allVideoData &&  (
         <ParallaxScrollView
           coverUrl={feedData.coverUrl}
           title={feedData.name}

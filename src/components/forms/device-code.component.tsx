@@ -141,6 +141,8 @@ export const DeviceCode = ({
 <ImageBackground source={bgLogo} resizeMode="cover" style={{ flex: 1,paddingBottom:100,
     justifyContent: "center"}}>
     <View style={styles.loginTextSection}>
+
+   
      </View>
      { store.isDeviceCode == false &&  store.isSubcription == false && 
  <View style={styles.loginButtonSection}>

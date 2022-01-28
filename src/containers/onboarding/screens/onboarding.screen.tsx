@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Alert, Platform } from "react-native";
+import { Alert, Platform,Text} from "react-native";
 import { firebase } from "@react-native-firebase/messaging";
 
 import {
@@ -30,6 +30,7 @@ import {
   DeviceCode,
   RegisterCredentials,
   LoginCredentials,
+  Offline,
 } from "@/components";
 import { OnboardingAuth as AuthSlide } from "@/components/onboarding/onboarding-auth.component";
 
@@ -51,13 +52,16 @@ export const OnboardingScreen = ({ navigation, route }: Props) => {
   const [showForm, setShowForm] = React.useState(false);
   const [showSpinner, setShowSpinner] = React.useState(false);
   const [showAuthSlide, setShowAuthSlide] = React.useState(false);
+  const { itemId } = route;
+  const isConnected = itemId?.isConnected;
 
   React.useEffect(() => {
-    if (route.params?.showAuth) {
-      setShowAuthSlide(true);
-      registerAppWithFCM()
-    }
-  }, [route]);
+    
+    // if(route.params?.showAuth) {
+    //   setShowAuthSlide(true);
+    //   registerAppWithFCM()
+    // }
+  }, [route,store]);
 
   const handleClose = () => {
     store.setVisitor(true);
@@ -220,11 +224,28 @@ export const OnboardingScreen = ({ navigation, route }: Props) => {
 
 
 
-        <DeviceCode
-        isVisible={showForm}
-        onClose={() => setShowForm(true)}
-        showSpinner={showSpinner}
-         />
+      {  store.connectionInfo.isConnected && 
+      
+      <DeviceCode
+      isVisible={showForm}
+      onClose={() => setShowForm(true)}
+      showSpinner={showSpinner}
+       />
+
+      }  
+
+    {  !store.connectionInfo.isConnected && 
+      
+      <Offline
+      
+       />
+
+      }  
+
+
+
+
+          {/* <Text>gggg {JSON.stringify(route)}</Text> */}
 
       {/* <SignupForm
         isVisible={showForm}
